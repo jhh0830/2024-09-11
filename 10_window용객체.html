@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>window용 객체</title>
+    <style>
+        .area{
+            width: 300px;
+            height:  150px;
+            font-size: 50px;
+            color: red;
+            border :1px solid black;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <h1>window용 객체</h1>
+
+    <p>
+        window 객체는 자바스크립트의 최상위 내장 객체이며,
+        window 객체의 하위 속성 (자식) 으로는 크게 
+        BOM 계열과  DOM 계열로 나뉨  <br><br>
+
+        - BOM (Browser Object Model) 
+        : 브라우저 창과 관련된 하위 속성객체들 <br>
+          location 객체, screen 객체, navigator 객체, history 객체 등 <br>
+        - DOM (Document Object Model)
+        : html 문서와 관련된 하위 속성객체 <br>
+          document 객체
+
+    </p>
+
+    <br>
+
+    <hr>
+
+    <h3>* window 객체</h3>
+
+    <p>
+        자바스크립트의 가장 최상위 내장객체로써,
+        브라우저창 하나를 나타내는 객체임!! <br>
+        브라우저창이 하나 열릴 때 마다 생성됨
+    </p>
+
+    <pre>
+        브라우저 창이 열릴때마다 내부적으로
+
+        var window = {
+            alert : function() {},
+            confirm : function() {},
+            console : {
+                log : function(){},
+                ...
+            },
+            document : {},
+            history : {},
+            location : {},
+            ...
+
+        };
+
+        이런식으로 객체가 하나씩 생성 되는거임!!
+        
+
+    </pre>
+
+
+    <br>
+
+    <hr>
+
+    <h4>window 객체에서 제공하는 유용한 메소드 속성들</h4>
+
+    <h4>- window.open("url", "창이름","창의특성");</h4>
+
+    <button onclick="test1();">네이버</button>
+
+    <script>
+        function test1(){
+
+            // window.open();
+            // > 인자값을 생략 시 빈 새창이 열림
+
+            // window.open("url", "창이름", "창의특성");
+            // 첫번째 인자값 : 새 창에서 열고자 하는 url 주소
+            // 두번째 인자값 : 창이름, 눈에 노출되는 항목은 아님
+            //                현재 열려있는 창에 대해 중복체크용 정보임
+            //                새로이 열리지 않고 이미 열려있는 곳에서
+            //                새로고침됨
+            //                (크롬에서는 새로고침, IE 는 새 탭이 뜸)
+            // 세번째 인자값 : 창의 특성, 새로 열릴 창의 너비, 높이, 툴바
+            //                스크롤바, 상태표시줄 등등 옵션 부여
+            //                (브라우저마다 다름 - 크롬에서는 왠만해서 안먹힘)
+
+
+
+
+
+
+            // window.open("http://www.naver.com", "ㅋㅋㅋ");
+
+            /*
+                * 창의 특성
+                => px
+                width : 창의 너비
+                heigth : 창의 높이
+
+                => yes / no
+                resizable : 창 크기 조절 가능 여부
+                location : 주소창이 보일건지 안보일건지 / 수정가능할건지 아닐건지
+                menuber : 메뉴바가 보일건지 안보일건지
+                scrollbars : 스크롤바가 보일건지 안보일건지
+                status : 상태표시줄을 보일건지 안보일건지
+                toolbar : 도구모음을 보일건지 안보일건지
+
+                여러 속성을 한번에 지정하고 싶으면 , 로 나열한다.
+                "속성명=값, 속성명=값, ...""
+            */
+
+            window.open("http://www.naver.com",
+             "ㅋㅋㅋ",
+             "width=500, height=600, resizable=no, location=yes, menubar=yes,scrollbars=no,status=yes,toolbar=yes");
+            // > 크롬에서는 width, height 속성이 적용됨
+            // > 크롬에서는 대부분의 속성들이 거의 적용되지 않음!!
+
+            // > IE는 과거에 모든 속성들이 다 적용되었었음!!
+            //      (IE : 표준을 안지키던 브라우저)
+
+
+
+
+
+
+
+
+
+        }
+    </script>
+
+    <br>
+
+    <hr>
+
+    <h4>- window.setTimeout(함수,ms);</h4>
+
+    <button onclick="test2();">실행확인</button>
+    <script>
+        function test2(){
+
+            /*
+            window.setTimeout(function(){ 
+
+                alert("ㅎㅇㅎㅇㅎㅇㅎㅇㅎ");
+
+            },3000); // 3000ms == 3초
+            */ 
+
+            // 내가 지정한 일정 시간 이후에
+            // 전달한 함수가 실행되게끔 유도해주는 기능!!
+
+            // > 3초 후에 alert 가 뜸
+
+            // > 내가 지정한 일정 시간 이후에
+            //   전달한 함수가 실행되게끔 유도해주는 기능!!
+
+            let newWindow = window.open();
+            // > window.open() 은 새 창을 열어주고
+            //   그 창을 나타내는 window 객체를 생성하여 반환해줌
+
+            newWindow.alert("3초 후에 이 페이지는 닫힙니다.");
+            // > alert 메소드는 사용자가 확인 버튼을 누를때 까지
+            //   무한 대기 상태임!! (다음 코드로 넘어가지 않음)
+
+            window.setTimeout(function(){
+                newWindow.close();
+                // > newWindow.close() 해당 브라우저 창을 닫는 메소드 속성
+            }, 3000);
+
+            // setTimeout : 내가 제시한 일정 시간 후에
+            //              해당 함수를 "단 한번" 만 실행
+
+        }
+    </script>
+
+    <br>
+    <hr>
+
+    <h4>- window.setInterval(함수 ,ms)</h4>
+
+    <button onclick="test3();">실행확인</button>
+    <div id="area1" class="area"></div>
+
+    <script>
+        function test3(){
+
+            var area1 = document.getElementById("area1");
+            /*
+            window.setInterval(function(){
+                area1.innerHTML += "ㅋ";
+
+            }, 300);
+            */
+           // > 0.3 초마다 ㅋㅋㅋ가 출력됨
+
+           // > 내가 지정한 시간 간격마다
+           // 전달한 함수를 매번 실행해주도록 유도하는 기능!!
+            /*
+           let conut =1;
+           window.setInterval(function(){
+                area1.innerHTML = conut++;
+           },1000);
+
+           */
+
+           // > 1 초마다 카운트 업
+
+           // setInterval 과 Date 내장객체를 활용하면
+           // 디지털 시계 기능을 구현할 수 있다.
+            window.setInterval(function(){
+                // 1초 마다 현재 시간의
+                // 시, 분, 초를 매번 추출하여 div에 출력
+
+                let now = new Date(); // 현재 날짜 및 시간 갖고오기
+                let hour = now.getHours(); // 시
+                let min = now.getMinutes(); // 분
+                let sec = now.getSeconds(); // 초
+
+                // console.log(hour,min,sec);
+
+                // 시분초를 출력하기 전에 고려사항
+                // > 17시 == 오후 5시
+                // > 1시 / 1분 / 1초 => 01시 / 01분 / 01초 
+                //      (두자릿수 맞춰서)
+
+                // 시간
+                let a = "";
+                if(hour > 12){ // 13시부터
+                    hour =  (hour - 12); // 13시 --> 1시
+                    a = "PM";
+                }else{
+                    
+                    a= "AM";
+                }
+
+
+                if(hour < 10) { // 1시 ~ 9t시 사이
+                    hour = "0" + hour; // 1~9 --> "01"~"09"
+                }
+                // 분
+                if(min < 10){ // 1분 ~ 9분 사이
+
+                    min = "0" + min; // 1 ~ 9 --> "01"~"09"
+
+                }
+
+                // 시
+                if(sec < 10){// 1초 ~ 9초 사이
+                    sec = "0" + sec; // 1 ~ 9 --> "01"~"09"
+                }
+
+
+                area1.innerHTML =  a +" "+ hour + " : " + min + " : "+ sec + "<br>";
+
+            },1000);
+            // setInterval : 내가 지정한 시간 간격 마다
+            //                "매번" 함수를 실행
+
+
+        }
+
+    </script>
+
+</body>
+</html>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
